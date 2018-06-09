@@ -1,0 +1,29 @@
+---
+title: "World's Dempgraphic Trends"
+author: "Ketan"
+date: "9 June 2018"
+output: html_document
+---
+
+#Project to Analyze World's Demographic Trends
+
+###Reading the Data
+
+```{r}
+stats <- read.csv("DemographicData.csv")
+```
+
+###Exploring the DataSet
+```{r}
+#Looking at the structure of the Data
+str(stats)
+
+#First Six Observations
+head(stats)
+
+#Last Six Observations
+tail(stats)
+
+#Summary of dataset
+summary(stats)
+```
