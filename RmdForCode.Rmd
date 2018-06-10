@@ -38,10 +38,44 @@ stats[stats$Birth.rate > 40 & stats$Internet.users <2,]
 ```
 **Comments : Out of 195 Countries only 3 Coutnries have birth rate more than 40 and internet users less than 2%.**
 
-###Visualizing the DataSet
+###Visualizing the DataSet (I)
+
+**Comments : Creating the scatterplot to illustrate Birth Rate and Internet Usage statistics by Country and categorised by Countries' Income Groups**
 
 ```{r}
-qplot(data=stats,x= Internet.users, y = Birth.rate, color = Income.Group,size=I(2))
+qplot(data=stats,x= Internet.users, y = Birth.rate, color = Income.Group,size=I(2),
+      main="Birth Rate Vs Internet Users")
 ```
 
-**Comments : After creating the above scatterplot for all countries (By categorizing into them into different income groups) , it is found that the if internet access among people is more then birth rate would be low **
+**Comments : From above scatterplot , it is found that the if internet access among people is more then birth rate tends to low **
+
+###Creating Dataframe
+```{r}
+source("CountryRegionVectors.R")
+my_df <- data.frame(Countries_2012_Dataset,Codes_2012_Dataset,Regions_2012_Dataset)
+head(my_df)
+
+#Changing the names of the Columns
+colnames(my_df) <- c("Country","Code","Region")
+head(my_df)
+
+#Merging the Dataframes
+head(stats)
+merged <- merge(stats,my_df,by.x = "Country.Code",by.y= "Code")
+head(merged)
+
+merged$Country <- NULL
+str(merged)
+
+```
+###Visualizing the DataSet (II)
+
+**Comments : Creating the scatterplot to illustrate Birth Rate and Internet Usage statistics by Country and categorised by Countries' Region**
+
+```{r}
+qplot(data=merged,x= Internet.users, y = Birth.rate, color = Region,size=I(2),
+      shape=I(17),alpha = I(0.7),
+      main="Birth Rate Vs Internet Users")
+```
+
+**Comments : From above scatterplot , it is found that the African use less Internet and their birth rate is high, while in case of Europe the birth rate is quite low and internet users are in large amount. **
