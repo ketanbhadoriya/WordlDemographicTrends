@@ -7,6 +7,12 @@ output: html_document
 
 #Project to Analyze World's Demographic Trends
 
+###Loading the required library
+
+```{r, warning=FALSE}
+library(ggplot2)
+```
+
 ###Reading the Data
 
 ```{r}
@@ -26,4 +32,16 @@ tail(stats)
 
 #Summary of dataset
 summary(stats)
+
+#The Countries where birth rate is greater than 40 and internet users are less than 2%
+stats[stats$Birth.rate > 40 & stats$Internet.users <2,]
 ```
+**Comments : Out of 195 Countries only 3 Coutnries have birth rate more than 40 and internet users less than 2%.**
+
+###Visualizing the DataSet
+
+```{r}
+qplot(data=stats,x= Internet.users, y = Birth.rate, color = Income.Group,size=I(2))
+```
+
+**Comments : After creating the above scatterplot for all countries (By categorizing into them into different income groups) , it is found that the if internet access among people is more then birth rate would be low **

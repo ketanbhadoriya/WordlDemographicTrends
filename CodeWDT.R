@@ -1,7 +1,10 @@
 #Start of the Project
 
+#Loading the required library
+library(ggplot2)
+
 #Reading the File
-#stringsAsFactors
+
 stats <- read.csv("DemographicData.csv")
 
 
@@ -12,5 +15,17 @@ head(stats)
 tail(stats)
 
 summary(stats)
-str(stats)
-levels(stats$Income.Group)
+
+
+#The Countries where internet users are less than 2%.
+filter <- stats$Internet.users < 2
+stats[filter,]
+
+#The Countries where birth rate is greater than 40 and internet users are less than 2%
+stats[stats$Birth.rate > 40 & stats$Internet.users <2,]
+
+#qplot(data = stats, x= Internet.users)
+
+#Visualizing the DataSet
+qplot(data=stats,x= Internet.users, y = Birth.rate, color = Income.Group,size=I(2))
+
